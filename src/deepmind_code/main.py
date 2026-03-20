@@ -34,6 +34,7 @@ def cli(ctx):
             console.print(Text(line, style=f"bold {color}"))
             time.sleep(0.05)
             
+        console.print(Align.center("[italic dim]Created by Arya Wiratama[/italic dim]\n"))
         console.print(Align.center("[bold white]A V A I L A B L E  C O M M A N D S[/bold white]\n"))
         
         with console.status("[bold blue]Scanning project context...", spinner="dots"):
