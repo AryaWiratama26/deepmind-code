@@ -1,6 +1,9 @@
 import click
+import time
 from rich.console import Console
 from rich.panel import Panel
+from rich.text import Text
+from rich.align import Align
 from deepmind_code.core.config import load_config, save_config, ConfigModel
 from deepmind_code.commands.chat import chat
 from deepmind_code.commands.edit import edit
@@ -9,11 +12,34 @@ from deepmind_code.commands.agent import agent
 
 console = Console()
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.version_option()
-def cli():
+@click.pass_context
+def cli(ctx):
     """deepmind-code: AI-powered coding assistant for the terminal."""
-    pass
+    if ctx.invoked_subcommand is None:
+        # Banner
+        banner = """
+    ____  __________  ____  __  _______   ______    ______ ____  ____  ______
+   / __ \/ ____/ ____/ __ \/  |/  /  _/ | / / __ \  / ____/ __ \/ __ \/ ____/
+  / / / / __/ / __/ / /_/ / /|_/ // //  |/ / / / / / /   / / / / / / / __/   
+ / /_/ / /___/ /___/ ____/ /  / // // /|  / /_/ / / /___/ /_/ / /_/ / /___   
+/_____/_____/_____/_/   /_/  /_/___/_/ |_/_____/  \____/\____/\____/_____/   
+        """
+        
+        
+        colors = ["blue", "bright_blue", "cyan", "bright_cyan"]
+        for i, line in enumerate(banner.split("\n")):
+            color = colors[i % len(colors)]
+            console.print(Text(line, style=f"bold {color}"))
+            time.sleep(0.05)
+            
+        console.print(Align.center("[bold white]A V A I L A B L E  C O M M A N D S[/bold white]\n"))
+        
+        with console.status("[bold blue]Scanning project context...", spinner="dots"):
+            time.sleep(0.8) 
+            
+        console.print(ctx.get_help())
 
 @cli.command()
 @click.option("--model", help="Default LLM model identifier")
