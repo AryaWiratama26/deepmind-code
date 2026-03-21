@@ -8,6 +8,35 @@ def test_context_manager_initialization(tmp_path):
     assert ".git" in ctx.ignored_patterns
     assert "node_modules" in ctx.ignored_patterns
 
+def test_load_dmcignore(tmp_path):
+    ignore_file = tmp_path / ".dmcignore"
+    ignore_file.write_text("*.log\nsecrets/\n# comment\n")
+    
+    ctx = ContextManager(root_dir=tmp_path)
+    assert "*.log" in ctx.ignored_patterns
+    assert "secrets" in ctx.ignored_patterns
+    
+    assert ctx._is_ignored("test.log") == True
+    assert ctx._is_ignored("secrets/key.txt") == True
+    assert ctx._is_ignored("normal.py") == False
+
+def test_get_file_tree_ignores(tmp_path):
+    (tmp_path / "secrets").mkdir()
+    (tmp_path / "secrets" / "key.txt").write_text("shh")
+    (tmp_path / "test.log").write_text("error")
+    (tmp_path / "app.py").write_text("print('hello')")
+    
+    ignore_file = tmp_path / ".dmcignore"
+    ignore_file.write_text("*.log\nsecrets\n")
+    
+    ctx = ContextManager(root_dir=tmp_path)
+    tree = ctx.get_file_tree()
+    
+    assert "app.py" in tree
+    assert "test.log" not in tree
+    assert "secrets" not in tree
+    assert "key.txt" not in tree
+
 def test_find_file(tmp_path):
     # Create a test directory structure
     test_dir = tmp_path / "subdir"

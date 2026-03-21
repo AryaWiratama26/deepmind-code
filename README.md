@@ -96,5 +96,19 @@ This powerful feature allows the AI to perform complex, multi-step tasks. The AI
 dmc agent "add user registration feature complete with unit tests"
 ```
 
+## Smart Context Management (`.dmcignore`)
+
+To prevent the AI from reading irrelevant or sensitive files (such as large data folders, `.env` files, or logs), you can create a `.dmcignore` file in the root of your project. It works identically to `.gitignore`.
+
+Example `.dmcignore`:
+```text
+*.log
+secrets/
+data.json
+node_modules/
+```
+By defining these rules, you save API tokens and significantly speed up the AI's response time during `chat` and `agent` modes.
+
 ## License
 This project is distributed under the MIT license. Please refer to the LICENSE file for more details.
+
