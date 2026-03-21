@@ -1,4 +1,10 @@
-# deepmind-code
+# Deepmind-Code
+
+<div align="center">
+
+  <img src="https://aryawiratama.vercel.app/assets/images/dmc.png" alt="dmc" >
+
+</div>
 
 deepmind-code is a command-line interface (CLI) tool designed to assist developers with their coding tasks directly from the terminal. By integrating various large language models (LLMs), this tool allows you to interact with your codebase, automate file modifications, and analyze system errors without having to leave your terminal environment.
 
