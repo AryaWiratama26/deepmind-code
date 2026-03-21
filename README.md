@@ -17,17 +17,18 @@ deepmind-code is a command-line interface (CLI) tool designed to assist develope
 
 ## Installation
 
-Follow the steps below to install deepmind-code on your system:
+The easiest way to install deepmind-code globally is using our installation script:
+```bash
+curl -sSL https://raw.githubusercontent.com/AryaWiratama26/deepmind-code/main/install.sh | bash
+```
+*(Make sure `~/.local/bin` is in your PATH)*
 
-1. Download or clone this repository to your computer.
-2. Navigate to the project directory:
-   ```bash
-   cd deepmind-code
-   ```
-3. Install the package in editable mode to ensure changes are synchronized:
-   ```bash
-   pip install -e .
-   ```
+Alternatively, you can install it manually:
+```bash
+git clone https://github.com/AryaWiratama26/deepmind-code.git
+cd deepmind-code
+pip install -e .
+```
 
 Once the installation is complete, you can invoke the application using the `dmc` command in your terminal.
 
